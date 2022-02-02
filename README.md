@@ -20,10 +20,10 @@ The code I used in R to wrangle the data.
 ## dino_list_Rfriendly.csv
 | Header | Description |
 |--------| ----------- |
-| species | The species of dinosaur |
-| game.mode | The game mode that you can play JWE2 in. Either Campaign, Chaos Theory, or Challenge mode |
-| game | The scenario within a given game mode (see below) |
-| node.loc1 & node.loc2 | The location of the research node that you need to reach in order to unlock this dinosaur. Specific to the Game Mode and Scenario you are playing in. 0 = Animal is available in-game through capture or being delivered; the pre-fix E indicates the dinosaur can only be unlocked on easy difficulty|
+| <code>species</code> | The species of dinosaur |
+| <code>game.mode</code> | The game mode that you can play JWE2 in. Either Campaign, Chaos Theory, or Challenge mode |
+| <code>game</code> | The scenario within a given game mode (see below) |
+| <code>node.loc1</code> & <code>node.loc2</code> | The location of the research node that you need to reach in order to unlock this dinosaur. Specific to the Game Mode and Scenario you are playing in. 0 = Animal is available in-game through capture or being delivered; the pre-fix E indicates the dinosaur can only be unlocked on easy difficulty|
 
 ## Scenarios within Game Modes
 | Header | Description |

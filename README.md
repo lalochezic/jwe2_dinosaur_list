@@ -7,12 +7,12 @@ The [code](https://raw.githubusercontent.com/lalochezic/jwe2_dinosaur_list/main/
 
 Here's some data about the data:
 ## dino_wrangling
-R version 3.6.3
-  <code>stringr</code> version 1.4.0
-  <code>reshape2</code> version 1.4.4
-  <code>tidyr</code> version 1.1.3
-  <code>plyr</code> version 1.8.6
-  <code>dplyr</code> version 1.0.6
+<code>R</code> version 3.6.3
+  <p><code>stringr</code> version 1.4.0
+  <p><code>reshape2</code> version 1.4.4
+  <p><code>tidyr</code> version 1.1.3
+  <p><code>plyr</code> version 1.8.6
+  <p><code>dplyr</code> version 1.0.6
 
 ## dino_list_Rfriendly.csv
 | Header | Description |

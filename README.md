@@ -7,6 +7,7 @@ The [code](https://raw.githubusercontent.com/lalochezic/jwe2_dinosaur_list/main/
 
 Here's some data about the data:
 ## dino_wrangling
+The code I used in R to wrangle the data.
 <code>R</code> version 3.6.3
   <p><code>stringr</code> version 1.4.0
   <p><code>reshape2</code> version 1.4.4

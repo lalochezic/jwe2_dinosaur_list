@@ -29,6 +29,9 @@ The code I used in R to wrangle the data.
 | <code>game</code> | The scenario within a given game mode (see below) |
 | <code>node.loc1</code> & <code>node.loc2</code> | The location of the research node that you need to reach in order to unlock this dinosaur. Specific to the Game Mode and Scenario you are playing in. 0 = Animal is available in-game through capture or being delivered; the prefix E indicates the dinosaur can only be unlocked on easy difficulty|
 
+## legend_processed.csv
+The legend for the [original dataset](https://docs.google.com/spreadsheets/d/1TCE6igXMHr_OSvqULKU2dqDBft_v8goaqsdZXiC9xLU/edit?usp=sharing). Used to change the codes within the dinosaur list into their full names.
+
 ## Scenarios within Game Modes
 | Header | Description |
 |--------| ----------- |

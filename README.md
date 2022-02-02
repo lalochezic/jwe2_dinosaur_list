@@ -1,4 +1,8 @@
 # jwe2_dinosaur_list
+**Disclaimer:**
+I am well aware that the term *dinosaur* is reserved for land reptiles with their legs tucked underneath them and *do not* include marine or flying reptiles (pterasaurs). Jurassic World Evolution 2 doesn't make that distinction and neither do the players, but chill out; it's just a game.
+
+## Hello Jurassic World
 A list of dinosaurs players can collect from Jurassic World Evolution 2 (JWE2) formatted into a .csv. Data was collected and collated by [r/Reformater](https://www.reddit.com/user/Reformater/) and posted [here on Reddit](https://www.reddit.com/r/jurassicworldevo/comments/r30iz8/spreadsheet_detailing_how_to_unlock_every/). Their data has been made accessible [here](https://docs.google.com/spreadsheets/d/1TCE6igXMHr_OSvqULKU2dqDBft_v8goaqsdZXiC9xLU/edit?usp=sharing).
 
 I simply downloaded the data and removed the columns containing the legends on the right and wrangled it to produce the data that you can access [here](https://raw.githubusercontent.com/lalochezic/jwe2_dinosaur_list/main/dino_list_Rfriendly.csv) or above. It is in a .csv file in long format, so it can be imported and manipulated in any data management or statistics software (e.g. R) to produce any kind of summary you want. Because it's in long format, you can save it as a .xlxs and put it through a pivot table to get summaries that way.

@@ -25,7 +25,7 @@ The code I used in R to wrangle the data.
 | game | The scenario within a given game mode (see below) |
 | node.loc1 & node.loc2 | The location of the research node that you need to reach in order to unlock this dinosaur. Specific to the Game Mode and Scenario you are playing in. 0 = Animal is available in-game through capture or being delivered; the pre-fix E indicates the dinosaur can only be unlocked on easy difficulty|
 
-## Scenarios within Games
+## Scenarios within Game Modes
 | Header | Description |
 |--------| ----------- |
 | Campaign | Arizona, Washington State, Pennsylvania, Oregon, California |

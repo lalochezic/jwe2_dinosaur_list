@@ -1,0 +1,134 @@
+## Ensure all strings are set to characters
+options(stringsAsFactors = F)
+
+
+
+#### REQUIRED PACKAGES ====
+
+library(stringr)
+library(reshape2)
+library(tidyr)
+library(plyr)
+library(dplyr)
+
+
+
+#### DATA IMPORT ====
+
+dino_list <- read.csv(#######)
+legend <- read.csv(#######)
+
+
+#### DATA PROCESSING ====
+
+## Ensure empty cells are set to NA
+dino_list[,2:4] <- apply(dino_list[,2:4], 2, function(x) ifelse(x == '', NA, x))
+
+## Melt the dataset so that we have 'species' as the fixed column only
+dino_list <- melt(dino_list, id.vars = 'species')
+
+## Change the name of the columns
+colnames(dino_list) <- c('species', 'game.mode', 'game')
+
+## Separate the game (i.e. the subset of the game mode) into different game mode subsets
+dino_list <- separate(dino_list, 'game', paste('game', 1:20, sep = '.'), sep = ', ')
+
+## Remove columns where they are completely NA (made form the previous code)
+dino_list <- dino_list[,colSums(is.na(dino_list)) < nrow(dino_list)]
+
+## Melt it so we have species and game mode
+dino_list <- melt(dino_list, id.vars = c('species', 'game.mode'))
+
+## Remove the variable column
+dino_list <- dino_list[,-3]
+
+## Change the name of the game column
+colnames(dino_list)[3] <- 'game'
+
+## Remove NAs
+dino_list <- droplevels(dino_list[!is.na(dino_list$game),])
+
+
+#### ** Sorting the challenge stuff ====
+## Take out the data that's from the challenge mode
+dino_list.challenge <- droplevels(dino_list[dino_list$game.mode == 'challenge',])
+
+## Separate the game column into the different research nodes that the dinosaur
+## can be accessed through
+dino_list.challenge <- separate(dino_list.challenge, 'game', c('game', paste('node.loc', 1:10, sep = ''), sep = '-'))
+
+## Change cells with '' into NAs
+dino_list.challenge[,3:ncol(dino_list.challenge)] <- apply(dino_list.challenge[,3:ncol(dino_list.challenge)], 2, function(x) ifelse(x == '', NA, x))
+
+## Remove columns that are all NAs
+dino_list.challenge <- dino_list.challenge[,colSums(is.na(dino_list.challenge)) < nrow(dino_list.challenge)]
+
+
+#### ** Sorting the chaos theory stuff ====
+## Take out the data that's from the chaos theory mode
+dino_list.chaos <- droplevels(dino_list[dino_list$game.mode == 'chaos_theory',])
+
+## Separate the game column into the different research nodes that the dinosaur
+## can be accessed through
+dino_list.chaos <- separate(dino_list.chaos, 'game', c('game', paste('node.loc', 1:10, sep = ''), sep = '-'))
+
+## Change cells with '' into NAs
+dino_list.chaos[,3:ncol(dino_list.chaos)] <- apply(dino_list.chaos[,3:ncol(dino_list.chaos)], 2, function(x) ifelse(x == '', NA, x))
+
+## Remove columns that are all NAs
+dino_list.chaos <- dino_list.chaos[,colSums(is.na(dino_list.chaos)) < nrow(dino_list.chaos)]
+
+
+#### ** Sorting out campaign ====
+## Take out the data that's from the challenge mode
+dino_list.campaign <- droplevels(dino_list[dino_list$game.mode == 'campaign',])
+
+#### Remove missable: This will change when I figure out what missable is ====
+dino_list.campaign$game <- str_remove(dino_list.campaign$game, '-missable-')
+#####
+
+
+## Give the two node columns since we need to bind everything together
+dino_list.campaign <- cbind(dino_list.campaign, node.loc1 = NA, node.loc2 = NA)
+
+
+#### ** Bind everything together ====
+dino_list <- rbind(dino_list.challenge, dino_list.campaign, dino_list.chaos)
+
+## Sort dataframe in order of species > game mode > game
+dino_list <- dino_list[with(dino_list, order(species, game.mode, game)),]
+
+## Rename the row numbers
+rownames(dino_list) <- NULL
+
+## Change the name of everything in game mode
+as.character(unique(dino_list$game.mode))
+View(data.frame(mapvalues = mapvalues(dino_list$game.mode,
+                                      from = as.character(unique(dino_list$game.mode)),
+                                      to = c('Challenge', 'Campaign', 'Chaos Theory')),
+                dino_list = dino_list$game.mode))
+dino_list$game.mode <- mapvalues(dino_list$game.mode,
+                                 from = as.character(unique(dino_list$game.mode)),
+                                 to = c('Challenge', 'Campaign', 'Chaos Theory'))
+
+## Remove 'Chaos Theory and Challenge' from the legend
+legend$campaign <- str_remove(legend$campaign, ' Chaos Theory')
+legend$campaign <- str_remove(legend$campaign, ' Challenge')
+
+## Change the game column to the full name
+View(data.frame(matched = legend$campaign[match(dino_list$game, legend$code)],
+                dino_list$game))
+dino_list$game <- legend$campaign[match(dino_list$game, legend$code)]
+
+## Set the game and game.mode as factors and order them
+dino_list$game.mode
+
+dino_list$game.mode <- factor(dino_list$game.mode, levels = c('Campaign', 'Chaos Theory', 'Challenge'))
+dino_list$game <- factor(dino_list$game, levels = c('Arizona', 'Washington State', 'Pennsylvania', 'Oregon', 'California',
+                                                    'Jurassic Park', 'Lost World', 'Jurassic Park 3', 'Jurassic World', 'Fallen Kingdom',
+                                                    'Canada', 'Germany', 'United Kingdom', 'North West USA', 'South West USA'))
+
+## Save
+write.csv(dino_list,
+          #######,
+          row.names = F)
